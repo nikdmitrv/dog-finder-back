@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
-const formidable = require("formidable");
+const path = require('path')
 
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -10,10 +10,12 @@ const MongoStore = require("connect-mongo")(session);
 // const RedisStore=require('connect-redis')(session)
 // const client = redis.createClient()
 
-mongoose.connect("mongodb://localhost/pet-finder", {
+mongoose.connect('mongodb+srv://datauser:neJNDDYBoEGvopZ6@cluster0-qyjcg.mongodb.net/stube?retryWrites=true&w=majority', {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
+mongoose.Promise = global.Promise
+const db = mongoose.connection
 
 const dogsFoundRouter = require("./routes/adverts/found");
 const dogsLostRouter = require("./routes/adverts/lost");
@@ -27,18 +29,15 @@ const imageRouter = require("./routes/imagerouter/imagerouter");
 
 const app = express();
 
-app.use(
-  session({
-    store: new MongoStore({
-      url: "mongodb://localhost/pet-finder",
-      ttl: 10 * 60
-    }),
-    key: "sniffer",
-    secret: "secretcat",
-    saveUninitialized: false,
-    resave: false
-  })
-);
+app.use(session({
+  store: new MongoStore({
+    mongooseConnection: db,
+  }),
+  key: 'user_sid',
+  secret: 'oh klahoma',
+  resave: false,
+  saveUninitialized: false,
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -52,10 +51,18 @@ app.use("/api/found", dogsFoundRouter);
 app.use("/api/lost", dogsLostRouter);
 app.use("/api/account", accountRouter);
 app.use("/api/matches", matchesRouter);
-app.use("/users/registration", RegistrationRouter);
-app.use("/users/login", LoginRouter);
-app.use("/users/logout", LogoutRouter);
-app.use("/users/auth", AuthRouter);
+app.use("/api/users/registration", RegistrationRouter);
+app.use("/api/users/login", LoginRouter);
+app.use("/api/users/logout", LogoutRouter);
+app.use("/api/users/auth", AuthRouter);
 app.use("/api/images", imageRouter);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')))
+}
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
+})
 
 module.exports = app;

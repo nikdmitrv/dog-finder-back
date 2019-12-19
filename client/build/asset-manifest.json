@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.60235411.chunk.css",
+    "main.js": "/static/js/main.6b283289.chunk.js",
+    "main.js.map": "/static/js/main.6b283289.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e8247ead.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e8247ead.js.map",
+    "static/css/2.7304bb50.chunk.css": "/static/css/2.7304bb50.chunk.css",
+    "static/js/2.3dc125a1.chunk.js": "/static/js/2.3dc125a1.chunk.js",
+    "static/js/2.3dc125a1.chunk.js.map": "/static/js/2.3dc125a1.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.ca246e1812092b8a373da3fdd727b62c.js": "/precache-manifest.ca246e1812092b8a373da3fdd727b62c.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.7304bb50.chunk.css.map": "/static/css/2.7304bb50.chunk.css.map",
+    "static/css/main.60235411.chunk.css.map": "/static/css/main.60235411.chunk.css.map",
+    "static/js/2.3dc125a1.chunk.js.LICENSE": "/static/js/2.3dc125a1.chunk.js.LICENSE",
+    "static/media/App.css": "/static/media/searchAndMatchHero.100b3849.jpg",
+    "static/media/js.png": "/static/media/js.207da02f.png",
+    "static/media/logo.png": "/static/media/logo.d1f66535.png",
+    "static/media/react.png": "/static/media/react.a7212ed4.png",
+    "static/media/redux.png": "/static/media/redux.c8f44df3.png",
+    "static/media/spinner.gif": "/static/media/spinner.20514799.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e8247ead.js",
+    "static/css/2.7304bb50.chunk.css",
+    "static/js/2.3dc125a1.chunk.js",
+    "static/css/main.60235411.chunk.css",
+    "static/js/main.6b283289.chunk.js"
+  ]
+}
