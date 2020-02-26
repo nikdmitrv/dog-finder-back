@@ -3,6 +3,7 @@ const multer = require('multer');
 const router = express.Router();
 const path = require('path');
 const helpers = require('./helpers');
+const fs = require('fs');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -15,7 +16,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage, fileFilter: helpers.imageFilter })
 
 router.get('/:filename', (req, res) => {
-    res.sendFile(path.join(__dirname, 'uploads', req.params.filename))
+    const filePath = path.join(__dirname, 'uploads', req.params.filename)
+    const fileExists = fs.existsSync(filePath)
+    res.sendFile(fileExists ? filePath : path.join(__dirname, 'uploads','placeholder.jpg')
 })
 
 router.post('/', upload.single('file'), (req, res) => {
