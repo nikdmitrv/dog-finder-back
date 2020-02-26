@@ -18,7 +18,7 @@ const upload = multer({ storage, fileFilter: helpers.imageFilter })
 router.get('/:filename', (req, res) => {
     const filePath = path.join(__dirname, 'uploads', req.params.filename)
     const fileExists = fs.existsSync(filePath)
-    res.sendFile(fileExists ? filePath : path.join(__dirname, 'uploads','placeholder.jpg')
+    res.sendFile(fileExists ? filePath : path.join(__dirname, 'uploads','placeholder.jpg'))
 })
 
 router.post('/', upload.single('file'), (req, res) => {
